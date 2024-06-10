@@ -34,7 +34,8 @@ CREATE TABLE `REWARD` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-And the business logic that crawler cares about that lives on the personal server:
+The API that exposes the data in the tables above does not live within this repo.
+This lives within the "personal_server_url", you will have to create your own implementation to expose the data:
 
 ```python
 def get_balances_by_address_manager(block):
