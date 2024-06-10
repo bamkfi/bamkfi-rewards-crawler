@@ -16,7 +16,7 @@ Bamk.fi Rewards Crawler is the first implementation of the rewards indexer thats
     - API
 - Bamk.fi reward crawler also interacts with 'personal_server'
   - This is where we store synthetic dollar balances per block as well as rewards per address for each block
-  - You could either DM the @bamkfi X.com account to talk about paid access or create your own implementation:
+  - You could create your own implementation:
 
 ```sql
 CREATE TABLE `BALANCES` (
