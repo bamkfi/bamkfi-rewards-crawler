@@ -1,8 +1,9 @@
 # Bamk.fi Rewards Crawler
 
-Bamk.fi Rewards Crawler is the first implementation of the rewards indexer thats keeps track of BAMK rewards for each address by keeping track of synthetic dollar holdings per block.
+Bamk.fi Rewards Crawler is the first implementation of the rewards indexer thats keeps track of BAMK rewards for each address by keeping track of NUSD synthetic dollar holdings per block.
 
 ## Server Requirements
+
 - bitcoin-cli is running on port of your choice
 - ord is running on port of your choice
 - OPI - Following OPI Protocol's are running
@@ -14,12 +15,10 @@ Bamk.fi Rewards Crawler is the first implementation of the rewards indexer thats
   - Brc20
     - Index
     - API
-- Bamk.fi reward crawler also interacts with 'personal_server'
-  - This is where we store synthetic dollar balances per block as well as rewards per address for each block
-  - You could create your own implementation:
+- MySQL database with the following schema:
 
 ```sql
-CREATE TABLE `BALANCES` (
+CREATE TABLE `BALANCES`   (
   `address` varchar(64) NOT NULL,
   `amount` bigint(11) NOT NULL,
   `block` int(11) NOT NULL,
@@ -34,7 +33,8 @@ CREATE TABLE `REWARD` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 ```
 
-The API that exposes the data in the tables above does not live within this repo.
+- API server
+  - Note the API that exposes the data in the tables above does not live within this repo.
 This lives within the "personal_server_url", you will have to create your own implementation to expose the data:
 
 ```python
@@ -45,8 +45,6 @@ def get_balances_by_address_manager(block):
     get_balances_response.build_balances(balances, block)
 
     return get_balances_response.toJSON()
-
-
 
 def get_leaderboard_manager(block):
   block_height = block
@@ -66,8 +64,8 @@ def get_leaderboard_manager(block):
   return leaderboard.toJSON()
 ```
 
-
 ## Usage
+
 - Create venv
   - ```python3 -m venv <myenvname>```
 - Install python requirements
@@ -79,7 +77,6 @@ def get_leaderboard_manager(block):
   - Can send it to the background like:
     - ```nohup python3 main_index.py &```
 
-
 ## Contributing
 
-Pull requests are welcome. 
+Pull requests are welcome.
